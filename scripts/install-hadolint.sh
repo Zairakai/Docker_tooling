@@ -18,7 +18,7 @@ if [ -f "${TOOL_VERSIONS_FILE}" ]; then
     HADOLINT_VERSION=$(grep "^hadolint=" "${TOOL_VERSIONS_FILE}" | cut -d= -f2)
     echo "→ Found .tool-versions: ${HADOLINT_VERSION}"
 else
-    HADOLINT_VERSION="${HADOLINT_VERSION:-2.12.0}"
+    HADOLINT_VERSION="${HADOLINT_VERSION:-2.15.1}"
     echo "→ Using default version: ${HADOLINT_VERSION}"
 fi
 
