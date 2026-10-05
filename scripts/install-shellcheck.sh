@@ -17,7 +17,7 @@ if [ -f "${TOOL_VERSIONS_FILE}" ]; then
     DESIRED_VERSION=$(grep "^shellcheck=" "${TOOL_VERSIONS_FILE}" | cut -d= -f2)
     echo "→ Found .tool-versions: ${DESIRED_VERSION}"
 else
-    DESIRED_VERSION="${SHELLCHECK_VERSION:-0.9.0}"
+    DESIRED_VERSION="${SHELLCHECK_VERSION:-0.11.0}"
     echo "→ Using default version: ${DESIRED_VERSION}"
 fi
 

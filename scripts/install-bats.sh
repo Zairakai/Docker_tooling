@@ -18,7 +18,7 @@ if [ -f "${TOOL_VERSIONS_FILE}" ]; then
     BATS_VERSION=$(grep "^bats=" "${TOOL_VERSIONS_FILE}" | cut -d= -f2)
     echo "→ Found .tool-versions: ${BATS_VERSION}"
 else
-    BATS_VERSION="${BATS_VERSION:-1.11.0}"
+    BATS_VERSION="${BATS_VERSION:-1.14.0}"
     echo "→ Using default version: ${BATS_VERSION}"
 fi
 

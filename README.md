@@ -150,10 +150,10 @@ Features:
 Versions are defined in `.tool-versions`:
 
 ```bash
-shellcheck=0.9.0
-hadolint=2.12.0
+shellcheck=0.11.0
+hadolint=2.15.1
 markdownlint-cli2=latest
-bats=1.11.0
+bats=1.14.0
 ```
 
 Override via environment:
