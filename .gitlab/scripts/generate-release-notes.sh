@@ -70,7 +70,7 @@ format_commit() {
 
     if [ -n "${TICKET}" ]; then
         # Remove ticket ID from message for cleaner output
-        MESSAGE=$(echo "${MESSAGE}" | sed "s/${TICKET} //")
+        MESSAGE="${MESSAGE/"${TICKET} "/}"
         echo "- ${MESSAGE} (${TICKET})"
     else
         echo "- ${MESSAGE}"
