@@ -13,10 +13,7 @@ stages:
   - validate
   - test
 
-variables:
-  ALPINE_IMAGE: "alpine:3.24"
-  BATS_IMAGE: "bats/bats:1.14.0"
-  SHELLCHECK_IMAGE: "koalaman/shellcheck-alpine:v0.11.0"
+# ALPINE_IMAGE, BATS_IMAGE and SHELLCHECK_IMAGE are variables of the zairakai/dockers group.
 
 # A tag whose format is not the one of VERSION_TAG_REGEX (group variable) fails here.
 tag-format:
@@ -45,7 +42,7 @@ shellcheck:
     name: ${SHELLCHECK_IMAGE}
     entrypoint: [""]
   script:
-    - find scripts make tests -name "*.sh" -print0 | xargs -0 shellcheck -x
+    - find scripts .gitlab/scripts make tests -name "*.sh" -print0 | xargs -0 shellcheck -x
 
 bats:
   stage: test
@@ -53,6 +50,6 @@ bats:
     name: ${BATS_IMAGE}
     entrypoint: [""]
   before_script:
-    - apk add --no-cache git make
+    - apk add --no-cache git make jq
   script:
     - bats -r tests/unit
