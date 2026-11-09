@@ -13,10 +13,7 @@ stages:
   - validate
   - test
 
-variables:
-  ALPINE_IMAGE: "alpine:3.24"
-  BATS_IMAGE: "bats/bats:1.14.0"
-  SHELLCHECK_IMAGE: "koalaman/shellcheck-alpine:v0.11.0"
+# ALPINE_IMAGE, BATS_IMAGE and SHELLCHECK_IMAGE are variables of the zairakai/dockers group.
 
 # A tag whose format is not the one of VERSION_TAG_REGEX (group variable) fails here.
 tag-format:
