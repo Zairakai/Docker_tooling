@@ -147,7 +147,7 @@ Features:
 
 ## Tool Versions
 
-Versions are defined in `.tool-versions`:
+In CI, the versions of the tools are variables of the `zairakai/dockers` GitLab group (`ALPINE_IMAGE`, `SHELLCHECK_IMAGE`, `HADOLINT_IMAGE`, `BATS_IMAGE`, `KANIKO_IMAGE`, `RELEASE_CLI_IMAGE`, `CRANE_VERSION`, `TRIVY_VERSION`): no pipeline file repeats them. For a local install, the versions are read from `.tool-versions`, which follows the group variables:
 
 ```bash
 shellcheck=0.11.0
