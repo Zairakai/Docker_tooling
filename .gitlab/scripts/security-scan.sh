@@ -23,8 +23,9 @@ if ! command -v trivy &>/dev/null; then
     echo "→ Installing Trivy..."
 
     if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-        # Install via script
-        curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+        # Version of the TRIVY_VERSION variable (zairakai/dockers group), else the one of .tool-versions
+        TRIVY_VERSION="${TRIVY_VERSION:-$(sed -n 's/^trivy=//p' "$(dirname "${BASH_SOURCE[0]}")/../../.tool-versions")}"
+        curl -sfL "https://raw.githubusercontent.com/aquasecurity/trivy/v${TRIVY_VERSION}/contrib/install.sh" | sh -s -- -b /usr/local/bin "v${TRIVY_VERSION}"
     else
         echo "❌ Trivy installation not supported on ${OSTYPE}"
         echo "   Install manually: https://aquasecurity.github.io/trivy/latest/getting-started/installation/"
