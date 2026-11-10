@@ -18,34 +18,34 @@ source "$(dirname "${BASH_SOURCE[0]}")/freshness-check.sh"
 
 # True for X.Y.Z or X.Y.Z-N.
 is_release_tag() {
-    [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9]+)?$ ]]
+  [[ "$1" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9]+)?$ ]]
 }
 
 # The version part of a release tag: 24.22.2-1 gives 24.22.2.
 tag_version() {
-    echo "${1%%-*}"
+  echo "${1%%-*}"
 }
 
 check_tag() {
-    : "${CI_COMMIT_TAG:?}" "${VERSION_ENV:?}"
-    local tag="${CI_COMMIT_TAG}" base version
+  : "${CI_COMMIT_TAG:?}" "${VERSION_ENV:?}"
+  local tag="${CI_COMMIT_TAG}" base version
 
-    if ! is_release_tag "${tag}"; then
-        echo "ERROR: the tag \"${tag}\" is not X.Y.Z or X.Y.Z-N (a pre-release is not published)."
-        return 1
-    fi
+  if ! is_release_tag "${tag}"; then
+    echo "ERROR: the tag \"${tag}\" is not X.Y.Z or X.Y.Z-N (a pre-release is not published)."
+    return 1
+  fi
 
-    base=$(upstream_from_dockerfile Dockerfile)
-    version=$(image_env "$(crane config "${base}")" "${VERSION_ENV}")
-    if [[ "$(tag_version "${tag}")" != "${version}" ]]; then
-        echo "ERROR: the tag \"${tag}\" does not match ${VERSION_ENV}=${version} of ${base}."
-        echo "       Tag the image with ${version}, or ${version}-N for a new build of that version."
-        return 1
-    fi
-    echo "Tag ${tag}: matches ${base} (${version})"
+  base=$(upstream_from_dockerfile Dockerfile)
+  version=$(image_env "$(crane config "${base}")" "${VERSION_ENV}")
+  if [[ "$(tag_version "${tag}")" != "${version}" ]]; then
+    echo "ERROR: the tag \"${tag}\" does not match ${VERSION_ENV}=${version} of ${base}."
+    echo "       Tag the image with ${version}, or ${version}-N for a new build of that version."
+    return 1
+  fi
+  echo "Tag ${tag}: matches ${base} (${version})"
 }
 
 # Run only when executed, so the tests can source the helpers.
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    check_tag
+  check_tag
 fi
